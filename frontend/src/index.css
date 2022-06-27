@@ -48,6 +48,7 @@ h3 {
   justify-content: space-between;
   align-items: center;
   padding: 20px 0;
+  position: relative;
   border-bottom: 1px solid #e6e6e6;
   margin-bottom: 60px;
 }
@@ -89,7 +90,7 @@ h3 {
 .goals {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 60px 10px;
 }
 
 .goal {
@@ -97,15 +98,6 @@ h3 {
   margin: 10px 0;
   padding: 20px 0 10px;
   position: relative;
-}
-
-.goal .close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  cursor: pointer;
-  border: none;
-  background: none;
 }
 
 .form,
@@ -136,7 +128,8 @@ h3 {
 }
 
 .btn {
-  padding: 10px 20px;
+  padding: 5px 10px;
+  margin-top: 10px;
   border: 1px solid #000;
   border-radius: 5px;
   background: #000;

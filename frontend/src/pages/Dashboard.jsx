@@ -6,6 +6,8 @@ import Spinner from '../components/Spinner'
 import {getGoals, reset} from '../features/goals/goalSlice'
 import GoalItem  from '../components/GoalItem'
 
+
+
 function Dashboard() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -34,14 +36,7 @@ function Dashboard() {
 
   return (
    <>
-    <section className='heading'>
-      <h1>
-        Welcome {user && user.name}
-        <p>Goals Dashboard</p>
-      </h1>
-    </section>
     <GoalForm/>
-
     <section className='content'>
       {goals.length > 0 ? (
         <div className='goals'>
@@ -49,7 +44,7 @@ function Dashboard() {
             <GoalItem key ={goal._id} goal = {goal}/>
           ))}
         </div>
-      ) : (<h3> You have not set any goals </h3>)}
+      ) : (<h2 style={{marginTop: '10%'}}> 생성된 메모가 없습니다 </h2>)}
     </section>
    </>
   )
