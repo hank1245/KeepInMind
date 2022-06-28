@@ -38,7 +38,11 @@ function Header() {
         <MenuOutlined />
         </Button>}
         <StyledDrawer
-            title="메인 메뉴"
+            title={user && (<li style={{listStyle: 'none'}}>
+                <button className='btn' onClick={onLogout}>
+                    <FaSignOutAlt/> 로그아웃
+                </button>
+        </li>)}
             placement='left'
             closable={false}
             onClose={onClose}
@@ -51,18 +55,14 @@ function Header() {
         </StyledDrawer>
         <Link to= '/' style={{color:'black', fontSize:'1.5rem', marginLeft: '60px'}}>KeepInMind</Link>
         {user ? <Search
-            placeholder="찾으시는 메모의 내용을 입력하세요"
+            placeholder="메모 찾기.."
             allowClear
             enterButton="검색"
             size="large"
-            style={{width:'25rem'}}
+            style={{width:'20rem'}}
             onSearch={onSearch}/> : null}
+        {!user &&
         <ul>
-            {user ? ( <li>
-                    <button className='btn' onClick={onLogout}>
-                        <FaSignOutAlt/> 로그아웃
-                    </button>
-            </li>) : (<> 
             <li>
                 <Link to='/login'style={{color:'black', fontSize:'1.2rem'}}>
                     <FaSignInAlt/> 로그인
@@ -73,8 +73,7 @@ function Header() {
                     <FaUser/> 회원가입
                 </Link>
             </li>
-            </>)}
-        </ul>
+        </ul>}
     </header>
   )
 }

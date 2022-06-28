@@ -14,7 +14,7 @@ function GoalItem({goal}) {
   }
   
   return (
-    <StyledCard hoverable title="제목 넣기" 
+    <StyledCard hoverable title={`${goal.text}`}
     extra={<StyledButton onClick={() => dispatch(deleteGoal(goal._id))}>X</StyledButton>}
     onMouseEnter = {() => setIsShown(true)}
     onMouseLeave = {() => setIsShown(false)}
@@ -22,7 +22,7 @@ function GoalItem({goal}) {
       <div>
         {new Date(goal.createdAt).toLocaleString('ko-KR')}
       </div>
-      <p>{goal.text}</p>
+      <p>{goal.content}</p>
       {isShown ?  <Actions>
         <EditOutlined style={{fontSize: '20px'}}/>
         <SettingOutlined style={{fontSize: '20px'}}/>

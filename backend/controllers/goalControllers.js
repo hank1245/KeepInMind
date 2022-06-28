@@ -16,12 +16,13 @@ const getGoals = asyncHandler(async (req, res) => {
 //route POST /api/goals
 //@access Private
 const setGoal = asyncHandler(async (req, res) => {
-  if (!req.body.text) {
+  if (!req.body.text || !req.body.content) {
     res.status(400);
-    throw new Error("제목을 입력해주세요");
+    throw new Error("제목과 내용을 입력해주세요");
   }
   const goal = await Goal.create({
     text: req.body.text,
+    content: req.body.content,
     user: req.user.id,
   });
   res.status(200).json(goal);
