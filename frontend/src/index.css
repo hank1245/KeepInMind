@@ -89,20 +89,21 @@ h3 {
 
 .goals {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 60px 10px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr) );
+  justify-items: center;
+  gap: 30px 60px;
 }
 
 .goal {
   background-color: #f4f4f4;
-  margin: 10px 0;
   padding: 20px 0 10px;
   position: relative;
+  height:fit-content;
 }
 
 .form,
 .content {
-  width: 70%;
+  width: 95%;
   margin: 0 auto;
 }
 
@@ -193,11 +194,10 @@ h3 {
   }
 }
 
-@media (max-width: 600px) {
-  .form {
-    width: 90%;
+@media (max-width: 910px) {
+  .goals {
+    gap: 30px 20px;
   }
-
   .heading h1 {
     font-size: 2rem;
   }

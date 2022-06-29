@@ -35,7 +35,7 @@ function GoalForm() {
                 <div style={{paddingRight:'10px'}}>
                     <StyledTextArea placeholder='메모 작성..' value={content} 
                     onChange={(e) => setContent(e.target.value)}
-                    autoSize={{ minRows: 3, maxRows: 5 }}/>
+                    autoSize={{ minRows: 5, maxRows: 7 }}/>
                 </div>
                 <CloseButton onClick={onClose}>닫기</CloseButton>
                </StyledDiv>)
@@ -69,7 +69,7 @@ position: relative;
 
 const CloseButton = styled.div`
 position: absolute; 
-top:65%; 
+top:75%; 
 right:1.3rem;
 width: 70px;
 height: 35px;

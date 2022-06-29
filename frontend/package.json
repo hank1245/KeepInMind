@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^7.2.1",
     "antd": "^4.21.3",
     "axios": "^0.27.1",
+    "lodash.debounce": "^4.0.8",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-icons": "^4.3.1",

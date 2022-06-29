@@ -28,12 +28,27 @@ const setGoal = asyncHandler(async (req, res) => {
   res.status(200).json(goal);
 });
 
+const searchGoals = asyncHandler(async (req, res) => {
+  console.log(req.body);
+  const goals = await Goal.find({
+    $and: [
+      {
+        $or: [
+          { text: { $regex: `${req.body.searchVal}` } },
+          { content: { $regex: `${req.body.searchVal}` } },
+        ],
+      },
+      { user: req.user.id },
+    ],
+  });
+  res.status(200).json(goals);
+});
+
 //@desc Update Goals
 //route PUT /api/goals/:id
 //@access Private
 const updateGoal = asyncHandler(async (req, res) => {
   const goal = await Goal.findById(req.params.id);
-
   if (!goal) {
     res.status(400);
     throw new Error("Goal not found");
@@ -84,4 +99,5 @@ module.exports = {
   setGoal,
   updateGoal,
   deleteGoal,
+  searchGoals,
 };

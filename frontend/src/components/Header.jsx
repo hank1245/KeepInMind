@@ -2,10 +2,13 @@ import {FaSignInAlt, FaSignOutAlt, FaUser} from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch} from 'react-redux'
 import {logout, reset} from '../features/auth/authSlice'
+import {searchGoals} from '../features/goals/goalSlice'
 import styled from 'styled-components'
 import {Drawer,Button, Input} from 'antd'
 import { useState } from 'react'
-import { MenuOutlined} from '@ant-design/icons'
+import { MenuOutlined,FormOutlined,PushpinOutlined,BellOutlined,DeleteOutlined} from '@ant-design/icons'
+import debounce from 'lodash.debounce'
+
 const {Search} = Input
 
 function Header() {
@@ -29,8 +32,12 @@ function Header() {
     setVisible(false)
   }
 
-  const onSearch = (value) => console.log(value)
+  const updateSearch = e => {
+    const val = e.target.value
+    dispatch(searchGoals({searchVal: val}))
+  }
 
+  const debouncedOnchange = debounce(updateSearch,250)
 
   return (
     <header className='header'>
@@ -49,18 +56,17 @@ function Header() {
             visible={visible}
             maskStyle={{backgroundColor:'transparent'}}
             >
-            <p>메모</p>
-            <p>중요</p>
-            <p>알람</p>
+            <MenuItem><Link to='/'><FormOutlined />메모</Link></MenuItem>
+            <MenuItem><Link to='/pinned'><PushpinOutlined />중요</Link></MenuItem>
+            <MenuItem><Link to='/trash'><DeleteOutlined />휴지통</Link></MenuItem>
         </StyledDrawer>
         <Link to= '/' style={{color:'black', fontSize:'1.5rem', marginLeft: '60px'}}>KeepInMind</Link>
         {user ? <Search
             placeholder="메모 찾기.."
             allowClear
-            enterButton="검색"
             size="large"
             style={{width:'20rem'}}
-            onSearch={onSearch}/> : null}
+            onChange={debouncedOnchange}/> : null}
         {!user &&
         <ul>
             <li>
@@ -81,6 +87,19 @@ function Header() {
 const StyledDrawer = styled(Drawer)`
 -webkit-box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.24); 
 box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.24);
+`
+const MenuItem = styled.p`
+font-size: 1.5rem;
+border-radius: 5px;
+padding: 2px;
+ :hover {
+    background-color:#74b9ff;
+ }
+cursor: pointer;
+    a {
+        text-decoration:none;
+        color:black;
+    }
 `
 
 
