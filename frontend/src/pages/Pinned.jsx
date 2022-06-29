@@ -8,13 +8,13 @@ import GoalItem  from '../components/GoalItem'
 
 
 
-function Dashboard() {
+function Pinned() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const {user} = useSelector((state) => state.auth)
   const { goals, isLoading, isError, message }  = useSelector((state) => state.goals)
-  const notTrashGoals = goals.filter(goal => !goal.isTrash)
+  const filteredGoals = goals.filter(goal => goal.isPinned)
 
   useEffect(() => {
     if(isError) {
@@ -39,9 +39,9 @@ function Dashboard() {
    <>
     <GoalForm/>
     <section className='content'>
-      {notTrashGoals.length > 0 ? (
+      {goals.length > 0 ? (
         <div className='goals'>
-          {notTrashGoals.map((goal) => (
+          {filteredGoals.map((goal) => (
             <GoalItem key ={goal._id} goal = {goal}/>
           ))}
         </div>
@@ -51,4 +51,4 @@ function Dashboard() {
   )
 }
 
-export default Dashboard
+export default Pinned

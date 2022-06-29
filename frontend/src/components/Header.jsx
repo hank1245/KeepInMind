@@ -56,9 +56,9 @@ function Header() {
             visible={visible}
             maskStyle={{backgroundColor:'transparent'}}
             >
-            <MenuItem><Link to='/'><FormOutlined />메모</Link></MenuItem>
-            <MenuItem><Link to='/pinned'><PushpinOutlined />중요</Link></MenuItem>
-            <MenuItem><Link to='/trash'><DeleteOutlined />휴지통</Link></MenuItem>
+            <Link to='/'><MenuItem><FormOutlined />메모</MenuItem></Link>
+            <Link to='/pinned'><MenuItem><PushpinOutlined />중요</MenuItem></Link>
+            <Link to='/trash'><MenuItem><DeleteOutlined />휴지통</MenuItem></Link>
         </StyledDrawer>
         <Link to= '/' style={{color:'black', fontSize:'1.5rem', marginLeft: '60px'}}>KeepInMind</Link>
         {user ? <Search
@@ -96,10 +96,8 @@ padding: 2px;
     background-color:#74b9ff;
  }
 cursor: pointer;
-    a {
-        text-decoration:none;
-        color:black;
-    }
+text-decoration:none;
+color:black;
 `
 
 

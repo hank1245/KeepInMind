@@ -12,7 +12,8 @@ function GoalItem({goal}) {
   const dispatch = useDispatch()
   const [isShown, setIsShown] = useState(false)
   const [isModalActive, setIsModalActive] = useState(false)
-  const [isPinned, setIsPinned] = useState(false)
+  const [isPinned, setIsPinned] = useState(goal.isPinned)
+  const [isTrash, setIsTrash] = useState(goal.isTrash)
   const [titleText, setTitleText] = useState(goal.text)
   const [contentText, setContentText] = useState(goal.content)
   const textRef = useRef()
@@ -24,7 +25,11 @@ function GoalItem({goal}) {
       {
         key: '1',
         label: (
-          <div><DeleteOutlined /> 휴지통으로 이동</div>
+          <div onClick={(event) => {
+            event.stopPropagation()
+            setIsTrash(true)
+            dispatch(dispatch(updateGoal({_id:goal._id, isPinned: false, isTrash: true})))
+          }}><DeleteOutlined /> 휴지통으로 이동</div>
         ),
         danger: true
       }
@@ -57,12 +62,12 @@ function GoalItem({goal}) {
   
   return (
     <>
-    {!isModalActive && 
+    {!isTrash && !isModalActive && 
     <StyledCard hoverable title={`${goal.text}`}
       extra={<StyledButton onClick={() => dispatch(deleteGoal(goal._id))}>X</StyledButton>}
       onMouseEnter = {() => setIsShown(true)}
       onMouseLeave = {() => setIsShown(false)}
-      className='goal'
+      className={isPinned ? `pinned` : 'goal'}
       onClick={onClick}>
         <p>{goal.content}</p>
         {isShown ?  
@@ -74,7 +79,10 @@ function GoalItem({goal}) {
                 event.stopPropagation()
               }}>
             <Space wrap>
-              <Dropdown overlay={menu} placement="bottomLeft" trigger={['click']}>
+              <Dropdown overlay={menu} placement="bottomLeft" trigger={['hover']}
+                onClick={(event) => {
+                event.stopPropagation()
+              }}>
                 <SettingOutlined style={{fontSize: '20px'}}/>
               </Dropdown>
             </Space>
@@ -82,6 +90,7 @@ function GoalItem({goal}) {
           <Tooltip placement="bottomLeft" title='고정'  onClick={(event) => {
                 event.stopPropagation()
                 setIsPinned(!isPinned)
+                dispatch(dispatch(updateGoal({_id:goal._id, isPinned: !isPinned})))
               }}>
             {isPinned ? <PushpinFilled style={{fontSize: '20px'}}/> : <PushpinOutlined style={{fontSize: '20px'}}/>}
           </Tooltip>

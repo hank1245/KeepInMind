@@ -152,11 +152,8 @@ export const goalSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
-      .addCase(updateGoal.pending, (state, action) => {
-        state.isLoading = true;
-      })
+      .addCase(updateGoal.pending, (state, action) => {})
       .addCase(updateGoal.fulfilled, (state, action) => {
-        state.isLoading = false;
         state.isSuccess = true;
         state.goals.map((goal) => {
           if (goal._id === action.payload._id) {
@@ -166,7 +163,6 @@ export const goalSlice = createSlice({
         });
       })
       .addCase(updateGoal.rejected, (state, action) => {
-        state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
       })

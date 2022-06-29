@@ -37,7 +37,7 @@ h3 {
 
 .container {
   width: 100%;
-  max-width: 960px;
+  max-width: 1080px;
   margin: 0 auto;
   padding: 0 20px;
   text-align: center;
@@ -99,6 +99,14 @@ h3 {
   padding: 20px 0 10px;
   position: relative;
   height:fit-content;
+}
+
+.pinned {
+  background-color: #f4f4f4;
+  padding: 20px 0 10px;
+  position: relative;
+  height:fit-content;
+  order: -1;
 }
 
 .form,
@@ -195,9 +203,6 @@ h3 {
 }
 
 @media (max-width: 910px) {
-  .goals {
-    gap: 30px 20px;
-  }
   .heading h1 {
     font-size: 2rem;
   }
