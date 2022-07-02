@@ -2,13 +2,13 @@ import {useDispatch} from 'react-redux'
 import {deleteGoal, updateGoal} from '../features/goals/goalSlice'
 import {Card, Modal, Tooltip,Dropdown, Menu, Space} from 'antd'
 import styled from 'styled-components'
-import { EditOutlined, PushpinOutlined, SettingOutlined, PushpinFilled,DeleteOutlined } from '@ant-design/icons';
+import { EditOutlined, PushpinOutlined, SettingOutlined, PushpinFilled,RetweetOutlined } from '@ant-design/icons';
 import { useState } from 'react'
 import { Input } from 'antd'
 import { useRef } from 'react';
 const { TextArea } = Input;
 
-function GoalItem({goal}) {
+function TrashItem({goal}) {
   const dispatch = useDispatch()
   const [isShown, setIsShown] = useState(false)
   const [isModalActive, setIsModalActive] = useState(false)
@@ -27,9 +27,9 @@ function GoalItem({goal}) {
         label: (
           <div onClick={(event) => {
             event.stopPropagation()
-            setIsTrash(true)
-            dispatch(dispatch(updateGoal({_id:goal._id, isPinned: false, isTrash: true})))
-          }}><DeleteOutlined /> 휴지통으로 이동</div>
+            setIsTrash(false)
+            dispatch(dispatch(updateGoal({_id:goal._id, isPinned: false, isTrash: false})))
+          }}><RetweetOutlined /> 복구하기</div>
         ),
         danger: true
       }
@@ -62,8 +62,9 @@ function GoalItem({goal}) {
   
   return (
     <>
-    {!isTrash && !isModalActive && 
+    {isTrash && !isModalActive && 
     <StyledCard hoverable title={`${goal.text}`}
+      extra={<StyledButton onClick={() => dispatch(deleteGoal(goal._id))}>X</StyledButton>}
       onMouseEnter = {() => setIsShown(true)}
       onMouseLeave = {() => setIsShown(false)}
       className={isPinned ? `pinned` : 'goal'}
@@ -131,4 +132,4 @@ justify-content: space-around;
 background-color: white;
 `
 
-export default GoalItem
+export default TrashItem

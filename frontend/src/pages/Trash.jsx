@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import GoalForm from '../components/GoalForm'
 import Spinner from '../components/Spinner'
 import {getGoals, reset} from '../features/goals/goalSlice'
-import GoalItem  from '../components/GoalItem'
+import TrashItem  from '../components/TrashItem'
 
 function Trash() {
     const navigate = useNavigate()
@@ -13,12 +13,6 @@ function Trash() {
     const {user} = useSelector((state) => state.auth)
     const { goals, isLoading, isError, message }  = useSelector((state) => state.goals)
     const filteredGoals = goals.filter(goal => goal.isTrash)
-    const changedGoals = filteredGoals.map((goal) => {
-        if(goal.isTrash) {
-            return {...goal,isTrash: false}
-        }
-    })
-    console.log(filteredGoals)
   
     useEffect(() => {
       if(isError) {
@@ -43,10 +37,10 @@ function Trash() {
      <>
       <GoalForm/>
       <section className='content'>
-        {changedGoals.length > 0 ? (
+        {filteredGoals.length > 0 ? (
           <div className='goals'>
-            {changedGoals && changedGoals.map((goal) => (
-              <GoalItem key ={goal._id} goal = {goal}/>
+            {filteredGoals && filteredGoals.map((goal) => (
+              <TrashItem key ={goal._id} goal = {goal}/>
             ))}
           </div>
         ) : (<h2 style={{marginTop: '10%'}}> 생성된 메모가 없습니다 </h2>)}
