@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb+srv://hank:escanor77%40@cluster0.n62c5un.mongodb.net/
+      - PORT=5001
+      - JWT_SECRET=verysecret
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:5001
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
