@@ -3,26 +3,28 @@ version: '3.8'
 services:
   backend:
     build:
-      context: ./backend
+      context: .
+      dockerfile: ./backend/Dockerfile
+    image: backend:latest
+    working_dir: /app
     ports:
-      - "5000:5000"
+      - "5001:5001"
+    volumes:
+      - ./backend:/app
     environment:
       - MONGO_URI=mongodb+srv://hank:escanor77%40@cluster0.n62c5un.mongodb.net/
       - PORT=5001
       - JWT_SECRET=verysecret
-    networks:
-      - app-network
+    command: ["node", "server.js"]
 
   frontend:
     build:
-      context: ./frontend
+      context: .
+      dockerfile: ./frontend/Dockerfile
+    image: frontend:latest
+    working_dir: /app
     ports:
       - "3000:3000"
-    environment:
-      - REACT_APP_API_URL=http://localhost:5001
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge
+    volumes:
+      - ./frontend:/app
+    command: ["npm", "start"]

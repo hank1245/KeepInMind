@@ -1,1 +1,2 @@
-export const API_URL = "http://backend:5001";
+export const AUTH_API_URL = "http://localhost:5001/api/users/";
+export const GOAL_API_URL = "http://localhost:5001/api/goals/";

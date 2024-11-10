@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_URL } from "../../constants/constant";
+import { AUTH_API_URL as API_URL } from "../../constants/constant";
 
 //Register User
 const register = async (userData) => {
