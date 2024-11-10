@@ -2,10 +2,11 @@ FROM node:16.14.2-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
-
 COPY . .
+
+COPY package*.json ./
+
+RUN npm install
 
 ENV MONGO_URI mongodb+srv://hank:escanor77%40@cluster0.n62c5un.mongodb.net/
 ENV PORT 5001
