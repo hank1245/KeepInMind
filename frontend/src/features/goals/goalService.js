@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const API_URL = "/api/goals/";
+import { API_URL } from "../../constants/constant";
 
 // Create new goal
 const createGoal = async (goalData, token) => {
